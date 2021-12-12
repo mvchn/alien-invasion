@@ -22,6 +22,7 @@ class Ship:
 		self.moving_right = False
 		self.moving_left = False
 
+
 	def update(self):
 	    """ Refresh ship position """ 
 	    if self.moving_right and self.rect.right < self.screen_rect.right: 
@@ -30,6 +31,7 @@ class Ship:
 	    	self.x -= self.settings.ship_speed
 
 	    self.rect.x = self.x 
+
 
 	def blitme(self):
 		""" Draw ship in in position """

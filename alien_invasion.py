@@ -5,6 +5,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
 	"""Common class for game behaviour"""
@@ -26,7 +27,9 @@ class AlienInvasion:
 
 		self.ship = Ship(self)
 		self.bullets = pygame.sprite.Group()
+		self.aliens = pygame.sprite.Group()
 
+		self._create_fleet()
 
 
 	def run_game(self):
@@ -40,7 +43,6 @@ class AlienInvasion:
 
 	def _check_events(self):
 	    """ Check mouse and keyboard """
-
 	    for event in pygame.event.get():
 	    	if event.type == pygame.QUIT:
 	    		sys.exit()
@@ -59,6 +61,13 @@ class AlienInvasion:
 	    	    	self.ship.moving_right = False
 	    	    elif event.key == pygame.K_LEFT:
 	    	    	self.ship.moving_left = False
+
+
+	def _create_fleet(self):
+		""" Create aliens fleet """
+		alien = Alien(self)
+		self.aliens.add(alien)
+
 
 	def _fire_bullet(self):
 		""" Create bullet and add it ti bullets group """
@@ -84,7 +93,10 @@ class AlienInvasion:
 	    for bullet in self.bullets.sprites():
 	    	bullet.draw_bullet()
 
+	    self.aliens.draw(self.screen)
+	    	
 	    pygame.display.flip()
+
 
 if __name__ == '__main__':
 	# create instance and run the game 
